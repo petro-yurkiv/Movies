@@ -23,5 +23,6 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         title = "Movies"
         view.backgroundColor = .red
+        viewModel.getMovies()
     }
 }

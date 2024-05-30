@@ -18,7 +18,8 @@ class MoviesCoordinator: ChildCoordinator {
     }
     
     func start() {
-        let viewModel = MoviesViewModel()
+        let networkService = MoviesNetworkService()
+        let viewModel = MoviesViewModel(networkService: networkService)
         let vc = MoviesViewController(viewModel: viewModel)
         navigationController.setViewControllers([vc], animated: true)
     }
