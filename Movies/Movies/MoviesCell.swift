@@ -48,7 +48,6 @@ final class MoviesCell: UITableViewCell {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24.0, weight: .medium)
-//        label.textColor = UIColor(hexString: Colors.title.name)
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = .min
@@ -58,7 +57,6 @@ final class MoviesCell: UITableViewCell {
     private var likeTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
-//        label.textColor = UIColor(hexString: Colors.subTitle.name)
         label.textColor = .black
         label.textAlignment = .left
         return label
@@ -75,7 +73,6 @@ final class MoviesCell: UITableViewCell {
     private var timeTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
-//        label.textColor = UIColor(hexString: Colors.subTitle.name)
         label.textColor = .black
         label.textAlignment = .left
         return label
@@ -83,7 +80,6 @@ final class MoviesCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
         setupWrapView()
         setupLayout()
     }

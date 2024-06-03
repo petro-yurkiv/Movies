@@ -19,7 +19,8 @@ class MoviesCoordinator: ChildCoordinator {
     
     func start() {
         let networkService = MoviesNetworkService()
-        let viewModel = MoviesViewModel(networkService: networkService)
+        let posterService = PosterNetworkService()
+        let viewModel = MoviesViewModel(networkService: networkService, posterService: posterService)
         let vc = MoviesViewController(viewModel: viewModel)
         navigationController.setViewControllers([vc], animated: true)
     }

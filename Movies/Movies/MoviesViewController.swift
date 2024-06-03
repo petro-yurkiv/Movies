@@ -11,6 +11,8 @@ class MoviesViewController: UIViewController {
     var viewModel: MoviesViewModel
     private var list: [Movie] = []
     private var isFilterViewHidden = true
+    private var searchText: String = ""
+    private var currentPage: Int = 1
     
     init(viewModel: MoviesViewModel) {
         self.viewModel = viewModel
@@ -24,24 +26,29 @@ class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Movies"
         setupLayout()
         setupTableView()
-        setupFilterButton()
+        configureNavigationBar()
+        setupBindings()
+        viewModel.fetch(search: "", page: 1)
+    }
+    
+    private func configureNavigationBar() {
+        title = "Movies"
         navigationController?.navigationBar.tintColor = .black
         
-        viewModel.getMovies { [weak self] result in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                    self.list = success
-                    self.postsTableView.reloadData()
-                case .failure(let failure):
-                    print(failure)
-                }
-            }
-        }
+        let search = UISearchController(searchResultsController: nil)
+        search.delegate = self
+        search.searchBar.delegate = self
+        self.navigationItem.searchController = search
+
+        let rightButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(rightButtonTapped))
+        rightButton.tintColor = .black
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    @objc func rightButtonTapped() {
+        filterView.isHidden.toggle()
     }
 
     private var mainStackView: UIStackView = {
@@ -52,14 +59,15 @@ class MoviesViewController: UIViewController {
         return stack
     }()
     
-    private var postsTableView: UITableView = {
-        let tableView = UITableView()
-        return tableView
+    private var filterView: FilterView = {
+        let view = FilterView()
+        view.isHidden = true
+        return view
     }()
     
-    private var addButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        return button
+    private var moviesTableView: UITableView = {
+        let tableView = UITableView()
+        return tableView
     }()
     
     private func setupLayout() {
@@ -70,19 +78,53 @@ class MoviesViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
         
-        mainStackView.addArrangedSubview(postsTableView)
-    }
-    
-    private func setupFilterButton() {
-        addButton.tintColor = .black
-        navigationItem.rightBarButtonItem = addButton
+        mainStackView.addArrangedSubview(filterView)
+        mainStackView.addArrangedSubview(moviesTableView)
     }
     
     private func setupTableView() {
-        postsTableView.separatorStyle = .none
-        postsTableView.dataSource = self
-        postsTableView.delegate = self
-        postsTableView.register(MoviesCell.self, forCellReuseIdentifier: MoviesCell.identifier)
+        moviesTableView.separatorStyle = .none
+        moviesTableView.dataSource = self
+        moviesTableView.delegate = self
+        moviesTableView.register(MoviesCell.self, forCellReuseIdentifier: MoviesCell.identifier)
+    }
+    
+    private func setupBindings() {
+        viewModel.onLoadSuccess = { [weak self] result in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.list = result
+                self.moviesTableView.reloadData()
+            }
+        }
+        
+        filterView.onNowPlayingButtonTapped = { [weak self] in
+            guard let self else { return }
+            self.viewModel.selectedMovieCategory = .nowPlaying
+            self.filterView.isHidden.toggle()
+            self.viewModel.fetch(search: "", page: 1)
+        }
+        
+        filterView.onPopularButtonTapped = { [weak self] in
+            guard let self else { return }
+            self.viewModel.selectedMovieCategory = .popular
+            self.filterView.isHidden.toggle()
+            self.viewModel.fetch(search: "", page: 1)
+        }
+        
+        filterView.onTopRatedButtonTapped = { [weak self] in
+            guard let self else { return }
+            self.viewModel.selectedMovieCategory = .topRated
+            self.filterView.isHidden.toggle()
+            self.viewModel.fetch(search: "", page: 1)
+        }
+        
+        filterView.onUpcomingButtonTapped = { [weak self] in
+            guard let self else { return }
+            self.viewModel.selectedMovieCategory = .upcoming
+            self.filterView.isHidden.toggle()
+            self.viewModel.fetch(search: "", page: 1)
+        }
     }
 }
 
@@ -116,10 +158,26 @@ extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200.0
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = self.list.count - 1
+        if indexPath.row == lastItem {
+            currentPage += 1
+            viewModel.fetch(search: searchText, page: currentPage)
+            print("IndexRow\(indexPath.row)")
+        }
+    }
 }
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("next screen")
+    }
+}
 
+extension MoviesViewController: UISearchBarDelegate, UISearchControllerDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
+        viewModel.fetch(search: searchText, page: 1)
     }
 }
