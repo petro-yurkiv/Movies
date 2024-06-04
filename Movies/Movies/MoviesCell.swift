@@ -137,10 +137,14 @@ final class MoviesCell: UITableViewCell {
         mainStackView.addArrangedSubview(textStackView)
         
         mainStackView.addArrangedSubview(lowerStackView)
-        lowerStackView.addArrangedSubview(genresTitle)
         lowerStackView.snp.makeConstraints { make in
             make.height.equalTo(24.0)
             make.trailing.leading.equalToSuperview()
+        }
+        
+        lowerStackView.addArrangedSubview(genresTitle)
+        genresTitle.snp.makeConstraints { make in
+            make.width.equalTo(UIScreen.main.bounds.size.width / 2)
         }
         
         lowerStackView.addArrangedSubview(ratingTitle)

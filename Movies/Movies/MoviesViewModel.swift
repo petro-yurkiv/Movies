@@ -16,7 +16,7 @@ final class MoviesViewModel {
     
     private var movies: [Movie] = []
     private var genres: [Genre] = []
-    var selectedMovieCategory: MovieCategory = .popular
+    var selectedMovieCategory: MovieCategory = .nowPlaying
     
     var onLoading: ((Bool) -> Void)?
     var onLoadSuccess: (([Movie]) -> Void)?
