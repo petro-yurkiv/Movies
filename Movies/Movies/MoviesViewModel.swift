@@ -95,4 +95,8 @@ final class MoviesViewModel {
             }
         }
     }
+    
+    func goToSelectedMovie(_ movie: Movie) {
+        coordinator?.navigateToSelectedMovie(movie)
+    }
 }

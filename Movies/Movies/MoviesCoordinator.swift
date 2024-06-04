@@ -22,7 +22,14 @@ final class MoviesCoordinator: ChildCoordinator {
         let posterService = PosterNetworkService()
         let genresService = GenresNetworkService()
         let viewModel = MoviesViewModel(networkService: networkService, posterService: posterService, genresService: genresService)
+        viewModel.coordinator = self
         let vc = MoviesViewController(viewModel: viewModel)
         navigationController.setViewControllers([vc], animated: true)
+    }
+    
+    func navigateToSelectedMovie(_ movie: Movie) {
+        let coordinator = SelectedMovieCoordinator(parentCoordinator: self, navigationController: navigationController)
+        coordinator.start(movie)
+        childCoordinators.append(coordinator)
     }
 }

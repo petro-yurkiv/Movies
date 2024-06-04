@@ -188,7 +188,8 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("next screen")
+        let selectedMovie = list[indexPath.row]
+        viewModel.goToSelectedMovie(selectedMovie)
     }
 }
 
