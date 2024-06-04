@@ -25,7 +25,9 @@ final class MoviesCell: UITableViewCell {
     
     private var posterView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8.0
         return imageView
     }()
     
@@ -48,25 +50,31 @@ final class MoviesCell: UITableViewCell {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24.0, weight: .medium)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = .min
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2.0, height: 2.0)
         return label
     }()
     
     private var genresTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .left
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2.0, height: 2.0)
         return label
     }()
     
     private var ratingTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .left
+        label.shadowColor = .black
+        label.shadowOffset = CGSize(width: 2.0, height: 2.0)
         return label
     }()
     
