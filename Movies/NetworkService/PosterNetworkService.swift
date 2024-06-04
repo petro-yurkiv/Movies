@@ -11,12 +11,7 @@ protocol PosterNetworkServiceProtocol {
     func getPosterData(posterPath: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
-class PosterNetworkService: PosterNetworkServiceProtocol {
-    enum NetworkError: Error {
-        case invalidResponse
-        case noData
-    }
-    
+final class PosterNetworkService: PosterNetworkServiceProtocol {    
     private func getPosterURL(_ posterPath: String) -> URL? {
         let baseURL = "https://image.tmdb.org/t/p/"
         let size = "w500"

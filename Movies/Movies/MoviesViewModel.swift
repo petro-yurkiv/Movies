@@ -7,17 +7,22 @@
 
 import Foundation
 
-class MoviesViewModel {
+final class MoviesViewModel {
     weak var coordinator: MoviesCoordinator?
+    
     private let networkService: MoviesNetworkServiceProtocol
     private let posterService: PosterNetworkServiceProtocol
+    private let genresService: GenresNetworkServiceProtocol
+    
     private var movies: [Movie] = []
+    var genres: [Genre] = []
     var selectedMovieCategory: MovieCategory = .popular
     var onLoadSuccess: (([Movie]) -> Void)?
     
-    init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol) {
+    init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, genresService: GenresNetworkServiceProtocol) {
         self.networkService = networkService
         self.posterService = posterService
+        self.genresService = genresService
     }
     
     func fetch(search: String, page: Int) {
@@ -37,14 +42,41 @@ class MoviesViewModel {
         case .success(let success):
             if page == 1 {
                 movies = success.results
-                onLoadSuccess?(movies)
+                mapGenresForMovies()
             } else {
                 movies.append(contentsOf: success.results)
-                onLoadSuccess?(movies)
+                mapGenresForMovies()
             }
         case .failure(let failure):
             print("failure")
         }
+    }
+    
+    func getGenres() {
+        genresService.fetchGenres { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                self.genres = success.genres
+            case .failure(let failure):
+                print("failure")
+            }
+        }
+    }
+    
+    private func mapGenresForMovies() {
+        movies = movies.map { movie in
+            var updatedMovie = movie
+            
+            let genresForMovie = movie.genreIds.compactMap { id in
+                return genres.first { $0.id == id }
+            }
+            
+            updatedMovie.genres = genresForMovie
+            return updatedMovie
+        }
+        
+        onLoadSuccess?(movies)
     }
 
     func getPoster(posterPath: String, completion: @escaping (Result<Data, Error>) -> Void) {

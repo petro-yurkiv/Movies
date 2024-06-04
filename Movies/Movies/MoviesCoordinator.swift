@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoviesCoordinator: ChildCoordinator {
+final class MoviesCoordinator: ChildCoordinator {
     var parentCoordinator: Coordinator
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -20,7 +20,8 @@ class MoviesCoordinator: ChildCoordinator {
     func start() {
         let networkService = MoviesNetworkService()
         let posterService = PosterNetworkService()
-        let viewModel = MoviesViewModel(networkService: networkService, posterService: posterService)
+        let genresService = GenresNetworkService()
+        let viewModel = MoviesViewModel(networkService: networkService, posterService: posterService, genresService: genresService)
         let vc = MoviesViewController(viewModel: viewModel)
         navigationController.setViewControllers([vc], animated: true)
     }

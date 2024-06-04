@@ -26,6 +26,7 @@ struct Movie: Codable {
     let voteAverage: Double
     let voteCount: Int
     let video: Bool
+    var genres: [Genre]?
 
     private enum CodingKeys: String, CodingKey {
         case id, title, overview

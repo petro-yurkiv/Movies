@@ -12,12 +12,7 @@ protocol MoviesNetworkServiceProtocol {
     func searchMovies(search: String, page: Int, completion: @escaping (Result<MoviesResponse, Error>) -> Void)
 }
 
-class MoviesNetworkService: MoviesNetworkServiceProtocol {
-    enum NetworkError: Error {
-        case invalidResponse
-        case noData
-    }
-    
+final class MoviesNetworkService: MoviesNetworkServiceProtocol {    
     func fetchMovies(category: MovieCategory, page: Int, completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
         let url = URL(string: category.baseURL)!
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
@@ -64,8 +59,8 @@ class MoviesNetworkService: MoviesNetworkServiceProtocol {
         request.allHTTPHeaderFields = ["accept": "application/json"]
         
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-            print("json \(json)")
+//            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+//            print("json \(json)")
             self?.handleResponse(completion: completion, data: data, response: response, error: error)
         }
         .resume()

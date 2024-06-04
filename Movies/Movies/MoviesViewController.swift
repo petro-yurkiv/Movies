@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+final class MoviesViewController: UIViewController {
     var viewModel: MoviesViewModel
     private var list: [Movie] = []
     private var isFilterViewHidden = true
@@ -30,6 +30,7 @@ class MoviesViewController: UIViewController {
         setupTableView()
         configureNavigationBar()
         setupBindings()
+        viewModel.getGenres()
         viewModel.fetch(search: "", page: 1)
     }
     
@@ -93,6 +94,7 @@ class MoviesViewController: UIViewController {
         viewModel.onLoadSuccess = { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
+//                print("movies in vc: \(result)")
                 self.list = result
                 self.moviesTableView.reloadData()
             }
@@ -164,7 +166,7 @@ extension MoviesViewController: UITableViewDataSource {
         if indexPath.row == lastItem {
             currentPage += 1
             viewModel.fetch(search: searchText, page: currentPage)
-            print("IndexRow\(indexPath.row)")
+//            print("IndexRow\(indexPath.row)")
         }
     }
 }

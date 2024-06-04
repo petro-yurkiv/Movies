@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FilterView: UIView {
+final class FilterView: UIView {
     var onNowPlayingButtonTapped: (() -> Void)?
     var onPopularButtonTapped: (() -> Void)?
     var onTopRatedButtonTapped: (() -> Void)?

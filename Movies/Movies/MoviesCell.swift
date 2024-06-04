@@ -54,7 +54,7 @@ final class MoviesCell: UITableViewCell {
         return label
     }()
     
-    private var likeTitle: UILabel = {
+    private var genresTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .black
@@ -62,15 +62,7 @@ final class MoviesCell: UITableViewCell {
         return label
     }()
     
-    private var likeStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 4.0
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        return stack
-    }()
-    
-    private var timeTitle: UILabel = {
+    private var ratingTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .black
@@ -90,8 +82,15 @@ final class MoviesCell: UITableViewCell {
     
     func setup(_ model: Movie, imageData: Data?) {
         titleLabel.text = "\(model.title + " " + (Date.yearString(from: model.releaseDate) ?? ""))"
-        likeTitle.text = "Category: \(model.genreIds)"
-        timeTitle.text = "Rating: \(model.voteAverage)"
+
+        if let genres = model.genres {
+            let genreNames = genres.map { $0.name }.joined(separator: ", ")
+            genresTitle.text = "Genres: \(genreNames)"
+        } else {
+            genresTitle.text = "Genres: N/A"
+        }
+        
+        ratingTitle.text = "Rating: \(model.voteAverage)"
         
         if let imageData = imageData {
             posterView.image = UIImage(data: imageData)
@@ -138,12 +137,12 @@ final class MoviesCell: UITableViewCell {
         mainStackView.addArrangedSubview(textStackView)
         
         mainStackView.addArrangedSubview(lowerStackView)
-        lowerStackView.addArrangedSubview(likeTitle)
+        lowerStackView.addArrangedSubview(genresTitle)
         lowerStackView.snp.makeConstraints { make in
             make.height.equalTo(24.0)
             make.trailing.leading.equalToSuperview()
         }
         
-        lowerStackView.addArrangedSubview(timeTitle)
+        lowerStackView.addArrangedSubview(ratingTitle)
     }
 }
