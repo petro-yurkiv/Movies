@@ -15,8 +15,10 @@ final class MoviesViewModel {
     private let genresService: GenresNetworkServiceProtocol
     
     private var movies: [Movie] = []
-    var genres: [Genre] = []
+    private var genres: [Genre] = []
     var selectedMovieCategory: MovieCategory = .popular
+    
+    var onLoading: ((Bool) -> Void)?
     var onLoadSuccess: (([Movie]) -> Void)?
     
     init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, genresService: GenresNetworkServiceProtocol) {
@@ -26,6 +28,7 @@ final class MoviesViewModel {
     }
     
     func fetch(search: String, page: Int) {
+        onLoading?(true)
         if search.isEmpty {
             networkService.fetchMovies(category: selectedMovieCategory, page: page) { [weak self] result in
                 self?.parseResult(page: page, result: result)
@@ -38,17 +41,19 @@ final class MoviesViewModel {
     }
     
     private func parseResult(page: Int, result: Result<MoviesResponse, Error>) {
-        switch result {
-        case .success(let success):
-            if page == 1 {
-                movies = success.results
-                mapGenresForMovies()
-            } else {
-                movies.append(contentsOf: success.results)
-                mapGenresForMovies()
+        DispatchQueue.main.async {
+            switch result {
+            case .success(let success):
+                if page == 1 {
+                    self.movies = success.results
+                    self.mapGenresForMovies()
+                } else {
+                    self.movies.append(contentsOf: success.results)
+                    self.mapGenresForMovies()
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
             }
-        case .failure(let failure):
-            print("failure")
         }
     }
     
@@ -59,7 +64,7 @@ final class MoviesViewModel {
             case .success(let success):
                 self.genres = success.genres
             case .failure(let failure):
-                print("failure")
+                print(failure.localizedDescription)
             }
         }
     }
@@ -77,6 +82,7 @@ final class MoviesViewModel {
         }
         
         onLoadSuccess?(movies)
+        onLoading?(false)
     }
 
     func getPoster(posterPath: String, completion: @escaping (Result<Data, Error>) -> Void) {

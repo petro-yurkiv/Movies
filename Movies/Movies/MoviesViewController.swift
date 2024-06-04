@@ -88,13 +88,29 @@ final class MoviesViewController: UIViewController {
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
         moviesTableView.register(MoviesCell.self, forCellReuseIdentifier: MoviesCell.identifier)
+        
+        let controll = UIRefreshControl()
+        controll.addTarget(self, action: #selector(onMoviesLoading), for: .valueChanged)
+        moviesTableView.refreshControl = controll
+    }
+    
+    @objc private func onMoviesLoading() {
+        viewModel.fetch(search: searchText, page: 1)
     }
     
     private func setupBindings() {
+        viewModel.onLoading = { [weak self] isLoading in
+            guard let self else { return }
+            if isLoading {
+                moviesTableView.refreshControl?.beginRefreshing()
+            } else {
+                moviesTableView.refreshControl?.endRefreshing()
+            }
+        }
+        
         viewModel.onLoadSuccess = { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
-//                print("movies in vc: \(result)")
                 self.list = result
                 self.moviesTableView.reloadData()
             }
@@ -166,7 +182,6 @@ extension MoviesViewController: UITableViewDataSource {
         if indexPath.row == lastItem {
             currentPage += 1
             viewModel.fetch(search: searchText, page: currentPage)
-//            print("IndexRow\(indexPath.row)")
         }
     }
 }
