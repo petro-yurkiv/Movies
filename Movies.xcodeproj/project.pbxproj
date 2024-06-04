@@ -17,6 +17,20 @@
 		520AB74B2C089D8400B3AC66 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB74A2C089D8400B3AC66 /* AppCoordinator.swift */; };
 		520AB7502C089EA400B3AC66 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB74F2C089EA400B3AC66 /* MoviesViewModel.swift */; };
 		520AB7522C089ED500B3AC66 /* MoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB7512C089ED500B3AC66 /* MoviesCoordinator.swift */; };
+		520AB7542C08C66C00B3AC66 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB7532C08C66C00B3AC66 /* MoviesResponse.swift */; };
+		520AB7572C08CD6E00B3AC66 /* MoviesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB7562C08CD6E00B3AC66 /* MoviesNetworkService.swift */; };
+		520AB7592C08D49400B3AC66 /* MovieCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AB7582C08D49400B3AC66 /* MovieCategory.swift */; };
+		52E27A622C09E99A00974B5E /* MoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A612C09E99A00974B5E /* MoviesCell.swift */; };
+		52E27A652C09EA2800974B5E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52E27A642C09EA2800974B5E /* SnapKit */; };
+		52E27A672C09EA2800974B5E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 52E27A662C09EA2800974B5E /* SnapKit-Dynamic */; };
+		52E27A6A2C0A036300974B5E /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A692C0A036300974B5E /* UITableViewCell+Extension.swift */; };
+		52E27A6C2C0CA92300974B5E /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A6B2C0CA92300974B5E /* Date+Extensions.swift */; };
+		52E27A6E2C0DC11C00974B5E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A6D2C0DC11C00974B5E /* UIImage+Extension.swift */; };
+		52E27A702C0DC9E000974B5E /* PosterNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A6F2C0DC9E000974B5E /* PosterNetworkService.swift */; };
+		52E27A732C0DD4FE00974B5E /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A722C0DD4FE00974B5E /* FilterView.swift */; };
+		52E27A752C0E062700974B5E /* GenresNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A742C0E062700974B5E /* GenresNetworkService.swift */; };
+		52E27A772C0E06DA00974B5E /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A762C0E06DA00974B5E /* GenresResponse.swift */; };
+		52E27A792C0E07C600974B5E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A782C0E07C600974B5E /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +46,18 @@
 		520AB74A2C089D8400B3AC66 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		520AB74F2C089EA400B3AC66 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		520AB7512C089ED500B3AC66 /* MoviesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCoordinator.swift; sourceTree = "<group>"; };
+		520AB7532C08C66C00B3AC66 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
+		520AB7562C08CD6E00B3AC66 /* MoviesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesNetworkService.swift; sourceTree = "<group>"; };
+		520AB7582C08D49400B3AC66 /* MovieCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategory.swift; sourceTree = "<group>"; };
+		52E27A612C09E99A00974B5E /* MoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCell.swift; sourceTree = "<group>"; };
+		52E27A692C0A036300974B5E /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		52E27A6B2C0CA92300974B5E /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		52E27A6D2C0DC11C00974B5E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		52E27A6F2C0DC9E000974B5E /* PosterNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterNetworkService.swift; sourceTree = "<group>"; };
+		52E27A722C0DD4FE00974B5E /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		52E27A742C0E062700974B5E /* GenresNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresNetworkService.swift; sourceTree = "<group>"; };
+		52E27A762C0E06DA00974B5E /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
+		52E27A782C0E07C600974B5E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52E27A652C09EA2800974B5E /* SnapKit in Frameworks */,
+				52E27A672C09EA2800974B5E /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +92,9 @@
 		520AB72E2C08991F00B3AC66 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				52E27A712C0DD4EF00974B5E /* Views */,
+				52E27A682C0A034300974B5E /* Extensions */,
+				520AB7552C08CD5900B3AC66 /* NetworkService */,
 				520AB7452C089D1100B3AC66 /* Coordinator */,
 				520AB74C2C089E0200B3AC66 /* App */,
 				520AB74D2C089E0900B3AC66 /* Movies */,
@@ -99,8 +130,49 @@
 				520AB7512C089ED500B3AC66 /* MoviesCoordinator.swift */,
 				520AB7332C08991F00B3AC66 /* MoviesViewController.swift */,
 				520AB74F2C089EA400B3AC66 /* MoviesViewModel.swift */,
+				52E27A612C09E99A00974B5E /* MoviesCell.swift */,
+				52E27A7A2C0F244D00974B5E /* Models */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		520AB7552C08CD5900B3AC66 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				520AB7562C08CD6E00B3AC66 /* MoviesNetworkService.swift */,
+				52E27A6F2C0DC9E000974B5E /* PosterNetworkService.swift */,
+				52E27A742C0E062700974B5E /* GenresNetworkService.swift */,
+				52E27A782C0E07C600974B5E /* NetworkError.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		52E27A682C0A034300974B5E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				52E27A692C0A036300974B5E /* UITableViewCell+Extension.swift */,
+				52E27A6B2C0CA92300974B5E /* Date+Extensions.swift */,
+				52E27A6D2C0DC11C00974B5E /* UIImage+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		52E27A712C0DD4EF00974B5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				52E27A722C0DD4FE00974B5E /* FilterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		52E27A7A2C0F244D00974B5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				520AB7532C08C66C00B3AC66 /* MoviesResponse.swift */,
+				520AB7582C08D49400B3AC66 /* MovieCategory.swift */,
+				52E27A762C0E06DA00974B5E /* GenresResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +191,10 @@
 			dependencies = (
 			);
 			name = Movies;
+			packageProductDependencies = (
+				52E27A642C09EA2800974B5E /* SnapKit */,
+				52E27A662C09EA2800974B5E /* SnapKit-Dynamic */,
+			);
 			productName = Movies;
 			productReference = 520AB72C2C08991F00B3AC66 /* Movies.app */;
 			productType = "com.apple.product-type.application";
@@ -147,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 520AB7232C08991F00B3AC66;
+			packageReferences = (
+				52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 520AB72D2C08991F00B3AC66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -176,10 +255,22 @@
 				520AB74B2C089D8400B3AC66 /* AppCoordinator.swift in Sources */,
 				520AB7522C089ED500B3AC66 /* MoviesCoordinator.swift in Sources */,
 				520AB7472C089D3500B3AC66 /* Coordinator.swift in Sources */,
+				52E27A6A2C0A036300974B5E /* UITableViewCell+Extension.swift in Sources */,
+				520AB7592C08D49400B3AC66 /* MovieCategory.swift in Sources */,
 				520AB7342C08991F00B3AC66 /* MoviesViewController.swift in Sources */,
 				520AB7302C08991F00B3AC66 /* AppDelegate.swift in Sources */,
+				520AB7542C08C66C00B3AC66 /* MoviesResponse.swift in Sources */,
 				520AB7502C089EA400B3AC66 /* MoviesViewModel.swift in Sources */,
+				52E27A792C0E07C600974B5E /* NetworkError.swift in Sources */,
+				52E27A6C2C0CA92300974B5E /* Date+Extensions.swift in Sources */,
+				52E27A732C0DD4FE00974B5E /* FilterView.swift in Sources */,
+				520AB7572C08CD6E00B3AC66 /* MoviesNetworkService.swift in Sources */,
+				52E27A772C0E06DA00974B5E /* GenresResponse.swift in Sources */,
 				520AB7492C089D5F00B3AC66 /* ChildCoordinator.swift in Sources */,
+				52E27A6E2C0DC11C00974B5E /* UIImage+Extension.swift in Sources */,
+				52E27A752C0E062700974B5E /* GenresNetworkService.swift in Sources */,
+				52E27A702C0DC9E000974B5E /* PosterNetworkService.swift in Sources */,
+				52E27A622C09E99A00974B5E /* MoviesCell.swift in Sources */,
 				520AB7322C08991F00B3AC66 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +494,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		52E27A642C09EA2800974B5E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		52E27A662C09EA2800974B5E /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 520AB7242C08991F00B3AC66 /* Project object */;
 }
