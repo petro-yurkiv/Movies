@@ -95,6 +95,7 @@ final class SelectedMovieViewController: UIViewController {
         configureNavigationBar()
         setupLayout()
         setupBindings()
+        configureRefresh()
         viewModel.getMovie()
     }
     
@@ -159,6 +160,15 @@ final class SelectedMovieViewController: UIViewController {
     }
     
     private func setupBindings() {
+        viewModel.onLoading = { [weak self] isLoading in
+            guard let self else { return }
+            if isLoading {
+                scrollView.refreshControl?.beginRefreshing()
+            } else {
+                scrollView.refreshControl?.endRefreshing()
+            }
+        }
+        
         viewModel.onLoadSuccess = { [weak self] movie in
             guard let self else { return }
             if let posterPath = movie.posterPath {
@@ -171,27 +181,44 @@ final class SelectedMovieViewController: UIViewController {
                         imageData = nil
                     }
                     
-                    if let imageData = imageData {
-                        self.postImage.image = UIImage(data: imageData)
-                    } else {
-                        if let image = UIImage(systemName: "x.circle.fill")?.withRenderingMode(.alwaysTemplate) {
-                            let resizedImage = image.resizeImage(targetSize: CGSize(width: 40.0, height: 40.0))
-                            self.postImage.image = resizedImage
-                            self.postImage.contentMode = .center
-                            self.postImage.clipsToBounds = true
-                        }
-                    }
+                    self.updateUI(data: imageData, movie: movie)
                 }
             }
-            
-            self.nameLabel.text = movie.title
-            self.descriptionLabel.text = "\((movie.originCountry.first ?? "") + " " + (Date.yearString(from: movie.releaseDate) ?? "N/A"))"
-            
-            let genreNames = movie.genres.map { $0.name }.joined(separator: ", ")
-            self.genresLabel.text = "Genres: \(genreNames)"
-            
-            self.ratingLabel.text = "Rating: \(movie.voteAverage)"
-            self.overviewLabel.text = movie.overview
         }
+    }
+    
+    private func configureRefresh() {
+        let controll = UIRefreshControl()
+        controll.addTarget(self, action: #selector(onMovieLoading), for: .valueChanged)
+        scrollView.refreshControl = controll
+    }
+    
+    private func setPostImage(data: Data?) {
+        if let data = data {
+            postImage.image = UIImage(data: data)
+        } else {
+            if let image = UIImage(systemName: "x.circle.fill")?.withRenderingMode(.alwaysTemplate) {
+                let resizedImage = image.resizeImage(targetSize: CGSize(width: 40.0, height: 40.0))
+                postImage.image = resizedImage
+                postImage.contentMode = .center
+                postImage.clipsToBounds = true
+            }
+        }
+    }
+    
+    private func updateUI(data: Data?, movie: SelectedMovie) {
+        setPostImage(data: data)
+        nameLabel.text = movie.title
+        descriptionLabel.text = "\((movie.originCountry.first ?? "") + " " + (Date.yearString(from: movie.releaseDate) ?? "N/A"))"
+        
+        let genreNames = movie.genres.map { $0.name }.joined(separator: ", ")
+        genresLabel.text = "Genres: \(genreNames)"
+        
+        ratingLabel.text = "Rating: \(movie.voteAverage)"
+        overviewLabel.text = movie.overview
+    }
+    
+    @objc private func onMovieLoading() {
+        viewModel.getMovie()
     }
 }

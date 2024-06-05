@@ -28,6 +28,7 @@ final class SelectedMovieViewModel {
     }
     
     func getMovie() {
+        onLoading?(true)
         moviesService.fetchSelectedMovie(id: id) { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -35,6 +36,7 @@ final class SelectedMovieViewModel {
                 case .success(let success):
                     print("success \(success)")
                     self.onLoadSuccess?(success)
+                    self.onLoading?(false)
                 case .failure(let failure):
                     print(failure.localizedDescription)
                 }

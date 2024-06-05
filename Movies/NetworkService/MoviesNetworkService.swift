@@ -85,6 +85,8 @@ final class MoviesNetworkService: MoviesNetworkServiceProtocol {
         request.allHTTPHeaderFields = ["accept": "application/json"]
         
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+            print("json \(json)")
             self?.handleResponse(completion: completion, data: data, response: response, error: error)
         }
         .resume()
