@@ -21,8 +21,10 @@ final class SelectedMovieCoordinator: ChildCoordinator {
         print("coordinator deitited")
     }
     
-    func start(_ movie: Movie) {
-        let viewModel = SelectedMovieViewModel(movie: movie)
+    func start(_ id: Int) {
+        let moviesService = MoviesNetworkService()
+        let posterService = PosterNetworkService()
+        let viewModel = SelectedMovieViewModel(id: id, moviesService: moviesService, posterService: posterService)
         viewModel.coordinator = self
         let vc = SelectedMovieViewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)

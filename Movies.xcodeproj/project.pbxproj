@@ -34,6 +34,7 @@
 		52E27A7E2C0F4AB900974B5E /* SelectedMovieCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */; };
 		52E27A802C0F4B0200974B5E /* SelectedMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */; };
 		52E27A822C0F4B7400974B5E /* SelectedMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */; };
+		52E27A842C0F974E00974B5E /* SelectedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A832C0F974E00974B5E /* SelectedMovie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCoordinator.swift; sourceTree = "<group>"; };
 		52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieViewController.swift; sourceTree = "<group>"; };
 		52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieViewModel.swift; sourceTree = "<group>"; };
+		52E27A832C0F974E00974B5E /* SelectedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */,
 				52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */,
 				52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */,
+				52E27A832C0F974E00974B5E /* SelectedMovie.swift */,
 			);
 			path = SelectedMovie;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				52E27A702C0DC9E000974B5E /* PosterNetworkService.swift in Sources */,
 				52E27A622C09E99A00974B5E /* MoviesCell.swift in Sources */,
 				52E27A802C0F4B0200974B5E /* SelectedMovieViewController.swift in Sources */,
+				52E27A842C0F974E00974B5E /* SelectedMovie.swift in Sources */,
 				520AB7322C08991F00B3AC66 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

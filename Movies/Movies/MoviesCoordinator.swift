@@ -29,7 +29,7 @@ final class MoviesCoordinator: ChildCoordinator {
     
     func navigateToSelectedMovie(_ movie: Movie) {
         let coordinator = SelectedMovieCoordinator(parentCoordinator: self, navigationController: navigationController)
-        coordinator.start(movie)
+        coordinator.start(movie.id)
         childCoordinators.append(coordinator)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 final class MoviesViewModel {
     weak var coordinator: MoviesCoordinator?
     
-    private let networkService: MoviesNetworkServiceProtocol
+    private let moviesService: MoviesNetworkServiceProtocol
     private let posterService: PosterNetworkServiceProtocol
     private let genresService: GenresNetworkServiceProtocol
     
@@ -22,7 +22,7 @@ final class MoviesViewModel {
     var onLoadSuccess: (([Movie]) -> Void)?
     
     init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, genresService: GenresNetworkServiceProtocol) {
-        self.networkService = networkService
+        self.moviesService = networkService
         self.posterService = posterService
         self.genresService = genresService
     }
@@ -30,11 +30,11 @@ final class MoviesViewModel {
     func fetch(search: String, page: Int) {
         onLoading?(true)
         if search.isEmpty {
-            networkService.fetchMovies(category: selectedMovieCategory, page: page) { [weak self] result in
+            moviesService.fetchMovies(category: selectedMovieCategory, page: page) { [weak self] result in
                 self?.parseResult(page: page, result: result)
             }
         } else {
-            networkService.searchMovies(search: search, page: page) { [weak self] result in
+            moviesService.searchMovies(search: search, page: page) { [weak self] result in
                 self?.parseResult(page: page, result: result)
             }
         }
