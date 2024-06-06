@@ -35,7 +35,7 @@ final class MoviesViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        title = "Movies"
+        title = "Popular Movies"
         navigationController?.navigationBar.tintColor = .black
         
         let search = UISearchController(searchResultsController: nil)
@@ -71,7 +71,21 @@ final class MoviesViewController: UIViewController {
         return tableView
     }()
     
+    private var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.isHidden = true
+        spinner.color = .gray
+        return spinner
+    }()
+    
     private func setupLayout() {
+        view.addSubview(spinner)
+        view.bringSubviewToFront(spinner)
+        spinner.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         view.addSubview(mainStackView)
         mainStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -103,8 +117,14 @@ final class MoviesViewController: UIViewController {
             guard let self else { return }
             if isLoading {
                 moviesTableView.refreshControl?.beginRefreshing()
+                self.view.bringSubviewToFront(self.spinner)
+                self.mainStackView.isHidden = true
+                self.spinner.isHidden = false
+                self.spinner.startAnimating()
             } else {
                 moviesTableView.refreshControl?.endRefreshing()
+                self.spinner.stopAnimating()
+                self.mainStackView.isHidden = false
             }
         }
         
@@ -114,6 +134,17 @@ final class MoviesViewController: UIViewController {
                 self.list = result
                 self.moviesTableView.reloadData()
             }
+        }
+        
+        viewModel.onFailure = { [weak self] failure in
+            guard let self else { return }
+            guard let failure else { return }
+            let alert = UIAlertController(title: failure,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK",
+                                          style: .cancel))
+            present(alert, animated: true)
         }
         
         filterView.onNowPlayingButtonTapped = { [weak self] in
@@ -188,7 +219,8 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("next screen")
+        let selectedMovie = list[indexPath.row]
+        viewModel.goToSelectedMovie(selectedMovie)
     }
 }
 

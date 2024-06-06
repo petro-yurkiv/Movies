@@ -1,19 +1,19 @@
 //
-//  GenresNetworkService.swift
+//  TrailerNetworkService.swift
 //  Movies
 //
-//  Created by Petro Yurkiv on 03.06.2024.
+//  Created by Petro Yurkiv on 05.06.2024.
 //
 
 import Foundation
 
-protocol GenresNetworkServiceProtocol {
-    func fetchGenres(completion: @escaping (Result<GenresResponse, Error>) -> Void)
+protocol TrailerNetworkServiceProtocol {
+    func fetchTrailer(id: Int, completion: @escaping (Result<MovieTrailerResponse, Error>) -> Void)
 }
 
-final class GenresNetworkService: GenresNetworkServiceProtocol {
-    func fetchGenres(completion: @escaping (Result<GenresResponse, Error>) -> Void) {
-        let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list")!
+final class TrailerNetworkService: TrailerNetworkServiceProtocol {
+    func fetchTrailer(id: Int, completion: @escaping (Result<MovieTrailerResponse, any Error>) -> Void) {
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)/videos")!
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
         let queryItems: [URLQueryItem] = [
@@ -36,9 +36,9 @@ final class GenresNetworkService: GenresNetworkServiceProtocol {
     }
 }
 
-private extension GenresNetworkService {
+private extension TrailerNetworkService {
     func handleResponse(
-        completion: @escaping (Result<GenresResponse, Error>) -> Void,
+        completion: @escaping (Result<MovieTrailerResponse, Error>) -> Void,
         data: Data?,
         response: URLResponse?,
         error: Error?
@@ -60,10 +60,9 @@ private extension GenresNetworkService {
         
         Task {
             do {
-                let result = try JSONDecoder().decode(GenresResponse.self, from: data)
+                let result = try JSONDecoder().decode(MovieTrailerResponse.self, from: data)
                 completion(.success(result))
             }
         }
     }
 }
-

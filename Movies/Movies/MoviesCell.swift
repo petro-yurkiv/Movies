@@ -58,7 +58,7 @@ final class MoviesCell: UITableViewCell {
         return label
     }()
     
-    private var genresTitle: UILabel = {
+    private var genresLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .white
@@ -68,7 +68,7 @@ final class MoviesCell: UITableViewCell {
         return label
     }()
     
-    private var ratingTitle: UILabel = {
+    private var ratingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .white
@@ -93,12 +93,12 @@ final class MoviesCell: UITableViewCell {
 
         if let genres = model.genres {
             let genreNames = genres.map { $0.name }.joined(separator: ", ")
-            genresTitle.text = "Genres: \(genreNames)"
+            genresLabel.text = "Genres: \(genreNames)"
         } else {
-            genresTitle.text = "Genres: N/A"
+            genresLabel.text = "Genres: N/A"
         }
         
-        ratingTitle.text = "Rating: \(model.voteAverage)"
+        ratingLabel.text = "Rating: \(model.voteAverage)"
         
         if let imageData = imageData {
             posterView.image = UIImage(data: imageData)
@@ -150,11 +150,11 @@ final class MoviesCell: UITableViewCell {
             make.trailing.leading.equalToSuperview()
         }
         
-        lowerStackView.addArrangedSubview(genresTitle)
-        genresTitle.snp.makeConstraints { make in
+        lowerStackView.addArrangedSubview(genresLabel)
+        genresLabel.snp.makeConstraints { make in
             make.width.equalTo(UIScreen.main.bounds.size.width / 2)
         }
         
-        lowerStackView.addArrangedSubview(ratingTitle)
+        lowerStackView.addArrangedSubview(ratingLabel)
     }
 }

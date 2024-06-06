@@ -10,7 +10,7 @@ import Foundation
 final class MoviesViewModel {
     weak var coordinator: MoviesCoordinator?
     
-    private let networkService: MoviesNetworkServiceProtocol
+    private let moviesService: MoviesNetworkServiceProtocol
     private let posterService: PosterNetworkServiceProtocol
     private let genresService: GenresNetworkServiceProtocol
     
@@ -20,9 +20,10 @@ final class MoviesViewModel {
     
     var onLoading: ((Bool) -> Void)?
     var onLoadSuccess: (([Movie]) -> Void)?
+    var onFailure: ((String?) -> Void)?
     
     init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, genresService: GenresNetworkServiceProtocol) {
-        self.networkService = networkService
+        self.moviesService = networkService
         self.posterService = posterService
         self.genresService = genresService
     }
@@ -30,11 +31,11 @@ final class MoviesViewModel {
     func fetch(search: String, page: Int) {
         onLoading?(true)
         if search.isEmpty {
-            networkService.fetchMovies(category: selectedMovieCategory, page: page) { [weak self] result in
+            moviesService.fetchMovies(category: selectedMovieCategory, page: page) { [weak self] result in
                 self?.parseResult(page: page, result: result)
             }
         } else {
-            networkService.searchMovies(search: search, page: page) { [weak self] result in
+            moviesService.searchMovies(search: search, page: page) { [weak self] result in
                 self?.parseResult(page: page, result: result)
             }
         }
@@ -52,7 +53,7 @@ final class MoviesViewModel {
                     self.mapGenresForMovies()
                 }
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.onFailure?(failure.localizedDescription)
             }
         }
     }
@@ -64,7 +65,7 @@ final class MoviesViewModel {
             case .success(let success):
                 self.genres = success.genres
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.onFailure?(failure.localizedDescription)
             }
         }
     }
@@ -94,5 +95,9 @@ final class MoviesViewModel {
                 completion(.failure(failure))
             }
         }
+    }
+    
+    func goToSelectedMovie(_ movie: Movie) {
+        coordinator?.navigateToSelectedMovie(movie)
     }
 }

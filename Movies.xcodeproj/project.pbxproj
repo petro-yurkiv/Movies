@@ -31,6 +31,15 @@
 		52E27A752C0E062700974B5E /* GenresNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A742C0E062700974B5E /* GenresNetworkService.swift */; };
 		52E27A772C0E06DA00974B5E /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A762C0E06DA00974B5E /* GenresResponse.swift */; };
 		52E27A792C0E07C600974B5E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A782C0E07C600974B5E /* NetworkError.swift */; };
+		52E27A7E2C0F4AB900974B5E /* SelectedMovieCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */; };
+		52E27A802C0F4B0200974B5E /* SelectedMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */; };
+		52E27A822C0F4B7400974B5E /* SelectedMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */; };
+		52E27A842C0F974E00974B5E /* SelectedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A832C0F974E00974B5E /* SelectedMovie.swift */; };
+		52E27A862C11101700974B5E /* MovieTrailerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A852C11101700974B5E /* MovieTrailerResponse.swift */; };
+		52E27A882C1110B700974B5E /* TrailerNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A872C1110B700974B5E /* TrailerNetworkService.swift */; };
+		52E27A8A2C1115E800974B5E /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A892C1115E800974B5E /* VideoPlayerViewController.swift */; };
+		52E27A8C2C11B6AE00974B5E /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A8B2C11B6AE00974B5E /* ImageViewController.swift */; };
+		52E27A902C11F68400974B5E /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +67,14 @@
 		52E27A742C0E062700974B5E /* GenresNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresNetworkService.swift; sourceTree = "<group>"; };
 		52E27A762C0E06DA00974B5E /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
 		52E27A782C0E07C600974B5E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCoordinator.swift; sourceTree = "<group>"; };
+		52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieViewController.swift; sourceTree = "<group>"; };
+		52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieViewModel.swift; sourceTree = "<group>"; };
+		52E27A832C0F974E00974B5E /* SelectedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovie.swift; sourceTree = "<group>"; };
+		52E27A852C11101700974B5E /* MovieTrailerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerResponse.swift; sourceTree = "<group>"; };
+		52E27A872C1110B700974B5E /* TrailerNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerNetworkService.swift; sourceTree = "<group>"; };
+		52E27A892C1115E800974B5E /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		52E27A8B2C11B6AE00974B5E /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +84,7 @@
 			files = (
 				52E27A652C09EA2800974B5E /* SnapKit in Frameworks */,
 				52E27A672C09EA2800974B5E /* SnapKit-Dynamic in Frameworks */,
+				52E27A902C11F68400974B5E /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +150,7 @@
 				520AB74F2C089EA400B3AC66 /* MoviesViewModel.swift */,
 				52E27A612C09E99A00974B5E /* MoviesCell.swift */,
 				52E27A7A2C0F244D00974B5E /* Models */,
+				52E27A7C2C0F4A9B00974B5E /* SelectedMovie */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -143,6 +162,7 @@
 				52E27A6F2C0DC9E000974B5E /* PosterNetworkService.swift */,
 				52E27A742C0E062700974B5E /* GenresNetworkService.swift */,
 				52E27A782C0E07C600974B5E /* NetworkError.swift */,
+				52E27A872C1110B700974B5E /* TrailerNetworkService.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -161,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				52E27A722C0DD4FE00974B5E /* FilterView.swift */,
+				52E27A892C1115E800974B5E /* VideoPlayerViewController.swift */,
+				52E27A8B2C11B6AE00974B5E /* ImageViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +193,26 @@
 				520AB7532C08C66C00B3AC66 /* MoviesResponse.swift */,
 				520AB7582C08D49400B3AC66 /* MovieCategory.swift */,
 				52E27A762C0E06DA00974B5E /* GenresResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		52E27A7C2C0F4A9B00974B5E /* SelectedMovie */ = {
+			isa = PBXGroup;
+			children = (
+				52E27A7D2C0F4AB900974B5E /* SelectedMovieCoordinator.swift */,
+				52E27A7F2C0F4B0200974B5E /* SelectedMovieViewController.swift */,
+				52E27A812C0F4B7400974B5E /* SelectedMovieViewModel.swift */,
+				52E27A8D2C11BC1D00974B5E /* Models */,
+			);
+			path = SelectedMovie;
+			sourceTree = "<group>";
+		};
+		52E27A8D2C11BC1D00974B5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52E27A832C0F974E00974B5E /* SelectedMovie.swift */,
+				52E27A852C11101700974B5E /* MovieTrailerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +236,7 @@
 			packageProductDependencies = (
 				52E27A642C09EA2800974B5E /* SnapKit */,
 				52E27A662C09EA2800974B5E /* SnapKit-Dynamic */,
+				52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Movies;
 			productReference = 520AB72C2C08991F00B3AC66 /* Movies.app */;
@@ -225,6 +268,7 @@
 			mainGroup = 520AB7232C08991F00B3AC66;
 			packageReferences = (
 				52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 520AB72D2C08991F00B3AC66 /* Products */;
 			projectDirPath = "";
@@ -254,12 +298,17 @@
 			files = (
 				520AB74B2C089D8400B3AC66 /* AppCoordinator.swift in Sources */,
 				520AB7522C089ED500B3AC66 /* MoviesCoordinator.swift in Sources */,
+				52E27A862C11101700974B5E /* MovieTrailerResponse.swift in Sources */,
+				52E27A8A2C1115E800974B5E /* VideoPlayerViewController.swift in Sources */,
 				520AB7472C089D3500B3AC66 /* Coordinator.swift in Sources */,
 				52E27A6A2C0A036300974B5E /* UITableViewCell+Extension.swift in Sources */,
 				520AB7592C08D49400B3AC66 /* MovieCategory.swift in Sources */,
 				520AB7342C08991F00B3AC66 /* MoviesViewController.swift in Sources */,
 				520AB7302C08991F00B3AC66 /* AppDelegate.swift in Sources */,
 				520AB7542C08C66C00B3AC66 /* MoviesResponse.swift in Sources */,
+				52E27A8C2C11B6AE00974B5E /* ImageViewController.swift in Sources */,
+				52E27A822C0F4B7400974B5E /* SelectedMovieViewModel.swift in Sources */,
+				52E27A882C1110B700974B5E /* TrailerNetworkService.swift in Sources */,
 				520AB7502C089EA400B3AC66 /* MoviesViewModel.swift in Sources */,
 				52E27A792C0E07C600974B5E /* NetworkError.swift in Sources */,
 				52E27A6C2C0CA92300974B5E /* Date+Extensions.swift in Sources */,
@@ -268,9 +317,12 @@
 				52E27A772C0E06DA00974B5E /* GenresResponse.swift in Sources */,
 				520AB7492C089D5F00B3AC66 /* ChildCoordinator.swift in Sources */,
 				52E27A6E2C0DC11C00974B5E /* UIImage+Extension.swift in Sources */,
+				52E27A7E2C0F4AB900974B5E /* SelectedMovieCoordinator.swift in Sources */,
 				52E27A752C0E062700974B5E /* GenresNetworkService.swift in Sources */,
 				52E27A702C0DC9E000974B5E /* PosterNetworkService.swift in Sources */,
 				52E27A622C09E99A00974B5E /* MoviesCell.swift in Sources */,
+				52E27A802C0F4B0200974B5E /* SelectedMovieViewController.swift in Sources */,
+				52E27A842C0F974E00974B5E /* SelectedMovie.swift in Sources */,
 				520AB7322C08991F00B3AC66 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +556,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -516,6 +576,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
