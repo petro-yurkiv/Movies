@@ -39,6 +39,7 @@
 		52E27A882C1110B700974B5E /* TrailerNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A872C1110B700974B5E /* TrailerNetworkService.swift */; };
 		52E27A8A2C1115E800974B5E /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A892C1115E800974B5E /* VideoPlayerViewController.swift */; };
 		52E27A8C2C11B6AE00974B5E /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E27A8B2C11B6AE00974B5E /* ImageViewController.swift */; };
+		52E27A902C11F68400974B5E /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 			files = (
 				52E27A652C09EA2800974B5E /* SnapKit in Frameworks */,
 				52E27A672C09EA2800974B5E /* SnapKit-Dynamic in Frameworks */,
+				52E27A902C11F68400974B5E /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +236,7 @@
 			packageProductDependencies = (
 				52E27A642C09EA2800974B5E /* SnapKit */,
 				52E27A662C09EA2800974B5E /* SnapKit-Dynamic */,
+				52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Movies;
 			productReference = 520AB72C2C08991F00B3AC66 /* Movies.app */;
@@ -265,6 +268,7 @@
 			mainGroup = 520AB7232C08991F00B3AC66;
 			packageReferences = (
 				52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 520AB72D2C08991F00B3AC66 /* Products */;
 			projectDirPath = "";
@@ -552,6 +556,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -564,6 +576,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52E27A632C09EA2700974B5E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		52E27A8F2C11F68400974B5E /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E27A8E2C11F68400974B5E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

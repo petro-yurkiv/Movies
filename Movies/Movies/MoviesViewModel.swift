@@ -20,6 +20,7 @@ final class MoviesViewModel {
     
     var onLoading: ((Bool) -> Void)?
     var onLoadSuccess: (([Movie]) -> Void)?
+    var onFailure: ((String?) -> Void)?
     
     init(networkService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, genresService: GenresNetworkServiceProtocol) {
         self.moviesService = networkService
@@ -52,7 +53,7 @@ final class MoviesViewModel {
                     self.mapGenresForMovies()
                 }
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.onFailure?(failure.localizedDescription)
             }
         }
     }
@@ -64,7 +65,7 @@ final class MoviesViewModel {
             case .success(let success):
                 self.genres = success.genres
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.onFailure?(failure.localizedDescription)
             }
         }
     }

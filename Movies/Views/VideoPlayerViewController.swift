@@ -6,44 +6,31 @@
 //
 
 import UIKit
-import AVKit
+import YouTubeiOSPlayerHelper
 
 final class VideoPlayerViewController: UIViewController {
-    private var url: URL?
-    private var player: AVPlayer?
-    private var playerViewController: AVPlayerViewController?
-
-    convenience init(url: URL) {
-        self.init()
-        self.url = url
+    private var videoID: String
+    
+    init(videoID: String) {
+        self.videoID = videoID
+        super.init(nibName: nil, bundle: nil)
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let url = url else {
-            return
-        }
-        
-        player = AVPlayer(url: url)
-        playerViewController = AVPlayerViewController()
-        playerViewController?.player = player
-        
-        if let playerViewController = playerViewController {
-            addChild(playerViewController)
-            view.addSubview(playerViewController.view)
-            playerViewController.view.frame = view.bounds
-            playerViewController.didMove(toParent: self)
-        }
+        let playerView = YTPlayerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        playerView.delegate = self
+        playerView.load(withVideoId: videoID)
+        view.addSubview(playerView)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        player?.play()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        player?.pause()
+}
+
+extension VideoPlayerViewController: YTPlayerViewDelegate {
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.playVideo()
     }
 }

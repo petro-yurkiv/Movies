@@ -78,6 +78,14 @@ final class SelectedMovieViewController: UIViewController {
         return label
     }()
     
+    private var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.isHidden = true
+        spinner.color = .gray
+        return spinner
+    }()
+    
     init(viewModel: SelectedMovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -105,6 +113,12 @@ final class SelectedMovieViewController: UIViewController {
     }
     
     private func setupLayout() {
+        view.addSubview(spinner)
+        view.bringSubviewToFront(spinner)
+        spinner.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -165,8 +179,14 @@ final class SelectedMovieViewController: UIViewController {
             guard let self else { return }
             if isLoading {
                 scrollView.refreshControl?.beginRefreshing()
+                self.view.bringSubviewToFront(self.spinner)
+                self.wrapView.isHidden = true
+                self.spinner.isHidden = false
+                self.spinner.startAnimating()
             } else {
                 scrollView.refreshControl?.endRefreshing()
+                self.spinner.stopAnimating()
+                self.wrapView.isHidden = false
             }
         }
         
@@ -185,6 +205,17 @@ final class SelectedMovieViewController: UIViewController {
                     self.updateUI(data: imageData, movie: movie)
                 }
             }
+        }
+        
+        viewModel.onFailure = { [weak self] failure in
+            guard let self else { return }
+            guard let failure else { return }
+            let alert = UIAlertController(title: failure,
+                                          message: nil,
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK",
+                                          style: .cancel))
+            present(alert, animated: true)
         }
     }
     

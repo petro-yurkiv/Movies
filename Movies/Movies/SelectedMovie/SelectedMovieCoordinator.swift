@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVKit
 
 final class SelectedMovieCoordinator: ChildCoordinator {
     var parentCoordinator: Coordinator
@@ -16,10 +15,6 @@ final class SelectedMovieCoordinator: ChildCoordinator {
     required init(parentCoordinator: Coordinator, navigationController: UINavigationController) {
         self.parentCoordinator = parentCoordinator
         self.navigationController = navigationController
-    }
-    
-    deinit {
-        print("coordinator deitited")
     }
     
     func start(_ id: Int) {
@@ -32,8 +27,8 @@ final class SelectedMovieCoordinator: ChildCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func presentVideo(url: URL) {
-        let vc = VideoPlayerViewController(url: url)
+    func presentVideo(videoID: String) {
+        let vc = VideoPlayerViewController(videoID: videoID)
         navigationController.present(vc, animated: true)
     }
     

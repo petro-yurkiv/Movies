@@ -13,6 +13,7 @@ final class SelectedMovieViewModel {
     
     var onLoading: ((Bool) -> Void)?
     var onLoadSuccess: ((SelectedMovie) -> Void)?
+    var onFailure: ((String?) -> Void)?
     
     private let moviesService: MoviesNetworkServiceProtocol
     private let posterService: PosterNetworkServiceProtocol
@@ -40,7 +41,7 @@ final class SelectedMovieViewModel {
                     self.onLoadSuccess?(success)
                     self.onLoading?(false)
                 case .failure(let failure):
-                    print(failure.localizedDescription)
+                    self.onFailure?(failure.localizedDescription)
                 }
             }
         }
@@ -59,26 +60,27 @@ final class SelectedMovieViewModel {
         }
     }
     
-    private func getTrailerURL(id: Int, completion: @escaping (URL?) -> Void) {
-        trailerService.fetchTrailer(id: id) { result in
+    private func getTrailerKey(id: Int, completion: @escaping (String?) -> Void) {
+        trailerService.fetchTrailer(id: id) { [weak self] result in
+            guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let success):
                     if let trailer = success.results.first {
-                        completion(URL(string: "https://www.youtube.com/watch?v=\(trailer.key)"))
+                        completion(trailer.key)
                     }
                 case .failure(let failure):
-                    print(failure.localizedDescription)
                     completion(nil)
+                    self.onFailure?(failure.localizedDescription)
                 }
             }
         }
     }
     
     func wathVideo() {
-        getTrailerURL(id: id) { [weak self] url in
-            if let url = url {
-                self?.coordinator?.presentVideo(url: url)
+        getTrailerKey(id: id) { [weak self] key in
+            if let key = key {
+                self?.coordinator?.presentVideo(videoID: key)
             }
         }
     }
