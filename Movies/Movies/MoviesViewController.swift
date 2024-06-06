@@ -35,7 +35,7 @@ final class MoviesViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        title = "Movies"
+        title = "Popular Movies"
         navigationController?.navigationBar.tintColor = .black
         
         let search = UISearchController(searchResultsController: nil)
