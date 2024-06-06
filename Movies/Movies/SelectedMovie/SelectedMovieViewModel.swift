@@ -16,11 +16,14 @@ final class SelectedMovieViewModel {
     
     private let moviesService: MoviesNetworkServiceProtocol
     private let posterService: PosterNetworkServiceProtocol
+    private let trailerService: TrailerNetworkServiceProtocol
+    var imageData: Data?
     
-    init(id: Int, moviesService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol) {
+    init(id: Int, moviesService: MoviesNetworkServiceProtocol, posterService: PosterNetworkServiceProtocol, trailerService: TrailerNetworkServiceProtocol) {
         self.id = id
         self.moviesService = moviesService
         self.posterService = posterService
+        self.trailerService = trailerService
     }
     
     deinit {
@@ -34,7 +37,6 @@ final class SelectedMovieViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let success):
-                    print("success \(success)")
                     self.onLoadSuccess?(success)
                     self.onLoading?(false)
                 case .failure(let failure):
@@ -54,6 +56,36 @@ final class SelectedMovieViewModel {
                     completion(.failure(failure))
                 }
             }
+        }
+    }
+    
+    private func getTrailerURL(id: Int, completion: @escaping (URL?) -> Void) {
+        trailerService.fetchTrailer(id: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let success):
+                    if let trailer = success.results.first {
+                        completion(URL(string: "https://www.youtube.com/watch?v=\(trailer.key)"))
+                    }
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func wathVideo() {
+        getTrailerURL(id: id) { [weak self] url in
+            if let url = url {
+                self?.coordinator?.presentVideo(url: url)
+            }
+        }
+    }
+    
+    func showImage() {
+        if let imageData = imageData {
+            coordinator?.presentImage(data: imageData)
         }
     }
 }

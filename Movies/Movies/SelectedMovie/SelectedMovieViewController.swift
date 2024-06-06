@@ -45,8 +45,6 @@ final class SelectedMovieViewController: UIViewController {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
-        image.backgroundColor = .brown
-        image.image = UIImage(systemName: "house")
         return image
     }()
     
@@ -95,7 +93,9 @@ final class SelectedMovieViewController: UIViewController {
         configureNavigationBar()
         setupLayout()
         setupBindings()
-        configureRefresh()
+        setupRefresh()
+        setupTrailerButton()
+        setupPostImage()
         viewModel.getMovie()
     }
     
@@ -114,6 +114,7 @@ final class SelectedMovieViewController: UIViewController {
         wrapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalTo(view)
+            make.height.greaterThanOrEqualToSuperview()
         }
         
         wrapView.addSubview(postImage)
@@ -187,14 +188,25 @@ final class SelectedMovieViewController: UIViewController {
         }
     }
     
-    private func configureRefresh() {
+    private func setupRefresh() {
         let controll = UIRefreshControl()
         controll.addTarget(self, action: #selector(onMovieLoading), for: .valueChanged)
         scrollView.refreshControl = controll
     }
     
+    private func setupTrailerButton() {
+        trailerButton.addTarget(self, action: #selector(onTrailerButtonTap), for: .touchUpInside)
+    }
+    
+    private func setupPostImage() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        postImage.addGestureRecognizer(tapGesture)
+        postImage.isUserInteractionEnabled = true
+    }
+    
     private func setPostImage(data: Data?) {
         if let data = data {
+            viewModel.imageData = data
             postImage.image = UIImage(data: data)
         } else {
             if let image = UIImage(systemName: "x.circle.fill")?.withRenderingMode(.alwaysTemplate) {
@@ -220,5 +232,13 @@ final class SelectedMovieViewController: UIViewController {
     
     @objc private func onMovieLoading() {
         viewModel.getMovie()
+    }
+    
+    @objc private func onTrailerButtonTap() {
+        viewModel.wathVideo()
+    }
+    
+    @objc private func imageTapped() {
+        viewModel.showImage()
     }
 }

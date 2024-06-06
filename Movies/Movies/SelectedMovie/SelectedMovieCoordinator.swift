@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 final class SelectedMovieCoordinator: ChildCoordinator {
     var parentCoordinator: Coordinator
@@ -24,9 +25,20 @@ final class SelectedMovieCoordinator: ChildCoordinator {
     func start(_ id: Int) {
         let moviesService = MoviesNetworkService()
         let posterService = PosterNetworkService()
-        let viewModel = SelectedMovieViewModel(id: id, moviesService: moviesService, posterService: posterService)
+        let trailerService = TrailerNetworkService()
+        let viewModel = SelectedMovieViewModel(id: id, moviesService: moviesService, posterService: posterService, trailerService: trailerService)
         viewModel.coordinator = self
         let vc = SelectedMovieViewController(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func presentVideo(url: URL) {
+        let vc = VideoPlayerViewController(url: url)
+        navigationController.present(vc, animated: true)
+    }
+    
+    func presentImage(data: Data) {
+        let vc = ImageViewController(imageData: data)
+        navigationController.present(vc, animated: true)
     }
 }
